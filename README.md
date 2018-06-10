@@ -1,3 +1,5 @@
+<h1>So postei aqui p pegar dps</h1>
+
 1.	Faça um programa que crie um arquivo TEXTO em disco, com o nome “dados.txt”, e escreva neste arquivo em disco uma sequência de números de 1 até 100, com um número em cada linha. Abra este arquivo em um editor de textos, como por exemplo o Bloco de Notas.
 
 2.	Faça um programa que leia o arquivo TEXTO criado no exercício 1. Exibir na tela os dados lidos do respectivo arquivo, com um número em cada linha.
