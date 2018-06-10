@@ -1,0 +1,10 @@
+Nome: alun1
+Nota1: 6.00
+Nota2: 6.00
+Media: 6.00
+
+Nome: alun2
+Nota1: 3.00
+Nota2: 3.00
+Media: 3.00
+
