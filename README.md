@@ -1,4 +1,4 @@
-<h1>So postei aqui p pegar dps</h1>
+<h3>So postei aqui p pegar dps</h3>
 
 1.	Faça um programa que crie um arquivo TEXTO em disco, com o nome “dados.txt”, e escreva neste arquivo em disco uma sequência de números de 1 até 100, com um número em cada linha. Abra este arquivo em um editor de textos, como por exemplo o Bloco de Notas.
 
