@@ -1,67 +1,236 @@
-<h3>So postei aqui p pegar dps</h3>
+# TRABALHO DE REDES DE COMPUTADORES FATEC PROFº JESSEN VIDAL 
 
-# Carlos
+## Configuração de VPN com autenticação por chave pública
 
-1.	Faça um programa que crie um arquivo TEXTO em disco, com o nome “dados.txt”, e escreva neste arquivo em disco uma sequência de números de 1 até 100, com um número em cada linha. Abra este arquivo em um editor de textos, como por exemplo o Bloco de Notas.
+### Membros
 
-2.	Faça um programa que leia o arquivo TEXTO criado no exercício 1. Exibir na tela os dados lidos do respectivo arquivo, com um número em cada linha.
+> * Nome: Carlos Augusto dos Santos Neto
+> * Nome: Gabriel Koyama Alves
 
-3. Faça um programa que leia um arquivo texto do disco, lendo linha a linha, e exibindo cada uma das
-linhas numeradas na tela. Pode ser lido um arquivo fonte – arquivo.c e mostre na tela com as linhas numeradas. Exemplo: - As primeiras linhas do arquivo iriam ser exibidas na tela da seguinte forma:
-Sugestão: pesquisar a função fgets -> lê uma linha inteira de uma vez.
+---
 
-4. Faça um programa que imite um editor de textos. Inicialmente você irá ler os dados digitados pelo
-usuário (linhas de texto) e criar um vetor em memória onde serão armazenados os textos fornecidos
-pelo usuário (texto de 1 até no máximo 50 linhas). O usuário vai escrever o seu texto, terminando por
-uma linha onde ele irá escrever apenas a palavra ‘FIM’, o que determina que ele não deseja mais
-digitar linhas de texto. Sendo assim, o texto final pode ter um número variável de linhas, entre 1 e 50.
-Salvar o conteúdo armazenado na memória neste vetor, em um arquivo texto em disco. 
+## Cenário
 
-5. Faça um programa que leia (do teclado) um cadastro de 10 alunos, indicando o nome, nota1, nota2.
- Calcule a média aritmética simples dos 10 alunos e depois escreva em um arquivo texto os dados de
-cada aluno: nome, nota1, nota2 e média. Lembre-se de que as notas e média deverão ser apresentadas como valores que possuem até 2 casas após a vírgula.
+> **Maquina filiar:**  
+>> Placas de rede:
+>>> * enp0s3 - 192.168.1.10/24 - Modo bridge
+>>> * enp0s8 - 192.168.10.10/24 - Rede Interna
 
-6. Faça um programa que leia os dados gerados pelo programa anterior do exercício 5 e mostre na tela as
-informações referentes aos alunos, calculando também a média geral da turma.
+> **Maquina Matriz:**
+>> Placas de rede:
+>>> * enp0s3 - 192.168.1.20/24 - Modo bridge
+>>> * enp0s8 - 192.168.10.20/24 - Rede Interna
 
-7. Faça um programa de criptografia de dados, ou seja, um programa capaz de ler um arquivo texto,
-codificar este arquivo através de alguma técnica de alteração do código ASCII (exemplo: somar 1 ao
-valor ASCII de cada caracter), e escrever em disco o arquivo codificado. Crie um outro programa que
-descriptografe um arquivo criado pelo programa de criptografia, realizando a operação inversa: ler o
-arquivo do disco, descodificar e escrever o novo arquivo em disco descriptografado. Lembre-se que
-para que seja possível criptografar/descriptografar um arquivo a função de codificação deve possuir
-uma função inversa. Exemplo de código de criptografia:
-tamanho = strlen(linha);
-for (i=0; i < tamanho; i++)
-linha_cripto[i] = linha[i] + 1; /* Soma 1 ao código de cada caracter da string */
-linha_cripto[tamanho]=’\0’; /* Adiciona a marca de fim de string */
-Desafios: Você consegue desenvolver uma função de criptografia/descriptografia que seja mais
-sofisticada e menos óbvia do que esta?
+---
 
+# MÁQUINA MATRIZ
 
-8. Faça um programa que peça para o usuário entrar um texto que deseja procurar (uma palavra) e que em
-seguida leia um arquivo texto do disco e procure por esta palavra no arquivo. Caso seja encontrada a
-palavra digitada pelo usuário em alguma das linhas do arquivo texto lido do disco, o programa deverá
-exibir na tela o número da linha do arquivo onde encontrou esta ocorrência da palavra, bem como o
-conteúdo da linha onde se encontra 
-a palavra procurada. Dica: use o comando “strstr” para procurar a palavra.
+* Na máquina matriz, vamos instalar o pacote OpenVPN
 
+```
+# aptitude install openvpn 
+```
 
-9. Faça um que abra um arquivo HTML e elimine todas as “tags” do texto, ou seja, o programa deve gerar um novo arquivo em disco que elimine todas as tags Html que são caracterizadas por comandos entre “<” e “>”. Veja abaixo um exemplo de um texto em HTML e do texto que deverá ser gerado pelo programa após eliminar as tags Html.
+* Acesse o diretório /etc/openvpn e crie a chave de encriptação de 2048 bits, que será usada para criar a conexão
 
-10. Faça um editor de textos, inspirado no NotePad (Bloco de Notas) ou WordPad/Word, que permita ao usuário inicialmente ler um texto de um arquivo texto armazenado em disco, armazene este texto em um vetor de strings em memória, onde cada linha do texto terá um número indicando a linha correspondente. Uma vez lido o arquivo, o programa deve ler comandos do usuário (laço), que poderá ser um dos seguintes comandos: Listar (opção 1: indicar o intervalo de linhas que deseja exibir na tela, linha inicial até linha final); Editar (opção 2: indicar qual a linha deseja editar, mostrar o seu conteúdo atual, ler um novo conteúdo e substituir o conteúdo da linha antiga pelo novo conteúdo); Inserir (opção 3: indicar depois de qual linha desejo inserir uma nova linha de texto, “abrindo espaço”  após esta linha e inserindo um novo texto); Apagar (opção 4: indicar qual linha deseja apagar, exibir seu conteúdo, confirmar a remoção e remover esta linha do texto); Abandonar (opção 5: sair do programa, sem salvar o texto editado, onde é pedida uma confirmação do usuário sobre a execução desta opção); Sair (opção 6: sair do programa, onde o texto será salvo em um arquivo em disco sobrescrevendo o arquivo original, sendo pedida uma confirmação do usuário sobre a execução desta opção). O programa no final deve portanto ter a capacidade de ler um arquivo de texto do disco, editar (listar, incluir, excluir, modificar linhas de texto) e salvar em disco o texto novo que foi editado, executando as operações usuais de um editor de textos simples.
+```
+# openvpn --genkey --secret /etc/openvpn/chave 
+```
 
-11.  Fazer um programa para simular uma agenda de telefones. Para cada pessoa deve-se ter os seguintes dados:
-• Nome
-• E-mail
-• Endereço (contendo campos para Rua, numero, complemento, bairro, cep,
-cidade, estado, país)
-• Telefone (contendo campo para DDD e número)
-• Data de aniversário (contendo campo para dia, mês, ano)
-• Observações : Uma linha (string) para alguma observações especial.
-a)	Definir a estrutura acima.
-b)	Declarar a variável agenda (vetor) com capacidade de agendar até 10 nomes.
-c)	Gravar os dados desse vetor em um arquivo chamado agenda.txt.
-d)	Definir um função para buscar por primeiro nome(busca_nome) no arquivo agenda.txt: Imprime os dados da pessoa com esse nome (se tiver mais de uma pessoa, imprime para todas)
+* Crie o arquivo de configuração do servidor.
 
-12. Grave a saída do programa a seguir em um arquivo pilha.txt. OBS: Estude o funcionamento da pilha com e sem ponteiro.
+```
+# vim /etc/openvpn/server.conf 
+```
+
+* Editamos os arquivos com os seguinte conteúdo :
+
+>> OBS: Deve-se utilizar para o tunelamento, uma rede distinta da suas demais placas de rede, no caso, temos uma rede Classe C no adaptador de rede enp0s3, então para o tunelamento, utilizamos uma rede Classe A. 
+
+```
+dev tun 
+ifconfig 10.0.0.1 10.0.0.2
+secret /etc/openvpn/chave
+port 5000
+comp-lzo
+verb 4
+keepalive 10 120
+persist-key
+persist-tun
+float
+```
+
+COMANDO     |   DESCRIÇÃO
+------------|------------
+dev tun     |   Habilita suporte ao drive TUN/TAP
+ifconfig    |   Cria o IP do servidor matriz (10.0.0.1) com suporte ao IP do servidor filial (10.0.0.1)
+secret      |   Comando para chamar nossa chave criptografada e o local dela
+port        |   Define a porta que a OpenVPN vai rodar
+comp-lzo    |   Ativa suporte a compressão
+verb        |   Nível para depuração de erros
+keepalive   |   Envia um ping a cada 10 segundos sem atividade e a VPN é reiniciada depois de 120 segundos sem respostas
+persist-key |   Assegura que o daemon mantenha as chaves carregadas, quando a VPN é restabelecida depois de uma queda de conexão 
+verb        |   Nível para depuração de erros
+keepalive   |   Envia um ping a cada 10 segundos sem atividade e a VPN é reiniciada depois de 120 segundos sem respostas
+persist-key |   Assegura que o daemon mantenha as chaves carregadas, quando a VPN é restabelecida depois de uma queda de conexão
+persist-tun |   Assegura que o daemon mantenha a interface tun aberta, quando a VPN é restabelecida depois de uma queda de conexão
+float       |   Permite que o túnel continue aberto mesmo que o endereço IP da outra máquina mude
+
+--- 
+
+# MÁQUINA FILIAL
+
+* Na máquina filial, devemos instalar o pacote OpenVPN
+
+```
+# aptitude install openvpn 
+```
+
+* Copiamos a chave do servidor matriz de forma segura (ssh sftp)
+
+```
+# scp <USER-SERVER>@<IP-SERVER>:/etc/openvpn/chave /etc/openvpn/
+```
+
+* Criaremos o arquivo de configuração do servidor.
+
+```
+# vim /etc/openvpn/client.conf
+```
+
+* Editamos de tal maneira.
+
+>> **Obsevação:** A única linha que muda em relação ao servidor é a linha a terceira linha no exmplo abaixo (**remote**)
+
+```
+dev tun 
+ifconfig 10.0.0.1 10.0.0.2
+remote 192.168.10.10
+secret /etc/openvpn/chave
+port 5000
+comp-lzo
+verb 4
+keepalive 10 120
+persist-key
+persist-tun
+float
+```
+
+* Detalhamento da configuração
+
+COMANDO     |   DESCRIÇÃO
+------------|------------
+dev tun     |   Habilita suporte ao drive TUN/TAP
+ifconfig    |   Cria o IP do servidor matriz (10.0.0.2) com suporte ao IP do servidor filial (10.0.0.1)
+**remote**  |   Refere-se ao IP da maquina matriz. Em nosso exemplo esta sendo usado um IP publico, sendo trocado por IP privado quando usado na Internet
+secret      |   Comando para chamar nossa chave criptografada e o local dela
+port        |   Define a porta que a OpenVPN vai rodar
+comp-lzo    |   Ativa suporte a compressão
+verb        |   Nível para depuração de erros
+keepalive   |   Envia um ping a cada 10 segundos sem atividade e a VPN é reiniciada depois de 120 segundos sem respostas
+persist-key |   Assegura que o daemon mantenha as chaves carregadas, quando a VPN é restabelecida depois de uma queda de conexão 
+verb        |   Nível para depuração de erros
+keepalive   |   Envia um ping a cada 10 segundos sem atividade e a VPN é reiniciada depois de 120 segundos sem respostas
+persist-key |   Assegura que o daemon mantenha as chaves carregadas, quando a VPN é restabelecida depois de uma queda de conexão
+persist-tun |   Assegura que o daemon mantenha a interface tun aberta, quando a VPN é restabelecida depois de uma queda de conexão
+float       |   Permite que o túnel continue aberto mesmo que o endereço IP da outra máquina mude
+
+--- 
+
+# LEVANTANDO A VPN
+
+## MATRIZ:
+
+* **Na máquina matriz**, devemos reiniciar a máquina para que possa ser reconhecido a interface de rede virtual *tun*, reponsável pelo tunelamento da rede virtual privada:
+
+```
+# init 6
+```
+
+* Com a máquina reiniciada, verificamos as intefaces de rede com o seguinte comando:
+
+```
+# ip a
+```
+
+>> Nas interfaces listadas, deve ter a presença de uma interface denominada **tun**, com o primeiro IP indicado no /etc/openvpn/server.conf
+
+* Devemos matar o tunelamento que possivelmente foi iniciado no ato do *reboot*, e inciar novamente:
+
+```
+# killall openvpn
+# openvpn --config /etc/openvpn/server.conf
+```
+
+>> Em algumas distribuições Linux, o Killall não vem instalado por padrão, então deve instalar o seguinte pacote:
+
+```
+aptitude install psmisc 
+```
+
+* Feito isso, já podemos dizer que temos uma conexão ativa. 
+
+## FILIAL:
+
+* **Na máquina filial**, devemos reiniciar a máquina para que possa ser reconhecido a interface de rede virtual *tun*, reponsável pelo tunelamento da rede virtual privada:
+
+```
+# init 6
+```
+
+* Com a máquina reiniciada, verificamos as intefaces de rede com o seguinte comando:
+
+```
+# ip a
+```
+
+>> Nas interfaces listadas, deve ter a presença de uma interface denominada **tun**, com o primeiro IP indicado no /etc/openvpn/client.conf
+
+* Devemos matar o tunelamento que possivelmente foi iniciado no ato do *reboot*, e inciar novamente:
+
+```
+# killall openvpn
+# openvpn --config /etc/openvpn/server.conf
+```
+
+* Feito isso, já podemos dizer que temos uma conexão ativa. 
+
+---
+
+# CRIANDO AUTENTICAÇÃO POR CHAVE PÚBLICA E TESTANDO CONEXÃO
+
+Para se autenticar por chave, a máquina cliente deve exportar uma chave **pública** para o servidor. Podemos criar uma *passprhasse* que é uma senha de aunteticação para chave, ou podemos deixar-la em branco, para se autenticar se necessidade insersão de senha:
+
+* Para criar uma chave pública, utilizamos o comando:
+
+```
+$ ssh-keygen -t rsa
+```
+
+>> O utilitário irá perguntar o caminho de hospedagem da chave, e a *passphrasse*
+
+* Para enviar ao servidor, podemos utilizar copiar para o diretório padrão de chaves ssh (~/.ssh/), ou podemos utilizar um utlilitário que o própio ssh do Linux nos proporciona, ele faz a mesma coisa, porém de uma forma mais legível
+
+```
+$ ssh-copy-id -i ~/.ssh/id_rsa.pub <USER-SERVER>@<IP-SERVER>
+```
+
+>> Como estamos enviando um arquivo ao servidor, será necessário a inserção da senha quando requirido.
+
+* Feito isso, devemos restartar o serviço de Matriz e Filial
+
+```
+service sshd restart
+```
+
+## Teste de conexão
+
+Para efetuar o teste, basta estabelecer uma conexão SSH pelo IP de tunelametno
+
+* Da filiar, vamos conectar ao Matriz
+
+```
+# ssh root@10.0.0.1
+```
+
+Se tudo ocorrer bem, a conexão será estabelecida com sucesso
