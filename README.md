@@ -1,8 +1,14 @@
-# TRABALHO DE REDES DE COMPUTADORES FATEC PROFº JESSEN VIDAL 
+# Configuração de VPN com autenticação por chave pública
 
-## Configuração de VPN com autenticação por chave pública
+### Instituição de ensino:
 
-### Membros
+> * FATEC PROFº JESSEN VIDAL
+
+### Disciplina:  
+
+> * Redes de Computadores
+
+### Membros:
 
 > * Nome: Carlos Augusto dos Santos Neto
 > * Nome: Gabriel Koyama Alves
